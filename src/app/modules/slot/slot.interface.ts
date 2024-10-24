@@ -1,6 +1,7 @@
+import mongoose from "mongoose";
 
 export interface TSlot {
-  room: string;           
+  room:mongoose.Types.ObjectId | string;           
   date: Date;             
   startTime: string;      
   endTime: string;        

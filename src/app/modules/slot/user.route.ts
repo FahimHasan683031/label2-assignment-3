@@ -1,17 +1,17 @@
 import express from 'express';
-import { UserControllers } from './user.controller';
+import { SlotControllers } from './slot.controller';
 
 
 const router = express.Router();
 
 router.post(
-  '/create-user',
-  UserControllers.createUser,
+  '/create-slot',
+  SlotControllers.createSlot,
 );
 
 router.get(
   '/',
-  UserControllers.getAllUsers,
+  SlotControllers.getAllSlot,
 );
 
-export const UserRoutes = router;
+export const SlotRoutes = router;
