@@ -13,7 +13,7 @@ const createRoom = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User is created succesfully',
+    message: 'Room is created succesfully',
     data: result,
   });
 });
@@ -24,7 +24,7 @@ const getAllRooms = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'All user get succesfully',
+    message: 'All Rooms get succesfully',
     data: result,
   });
 });
