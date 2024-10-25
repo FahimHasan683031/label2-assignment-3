@@ -5,7 +5,7 @@ export interface TBooking {
   slots: mongoose.Types.ObjectId[] | string[];  
   user: mongoose.Types.ObjectId | string;  
   date: Date;
-  totalAmount: number;
-  isConfirmed: 'confirmed' | 'unconfirmed' | 'canceled';  
-  isDeleted: boolean;  
+  totalAmount?: number;
+  isConfirmed?: 'confirmed' | 'unconfirmed' | 'canceled';  
+  isDeleted?: boolean;  
 }

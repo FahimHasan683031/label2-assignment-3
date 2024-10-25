@@ -11,7 +11,32 @@ const getAllRoomsFromDB = async () => {
   return rooms;
 };
 
+const getRoomById = async(id:string)=>{
+  const room = await Room.findOne({_id:id});
+  return room
+}
+
+const updateRoomIntoDB = async (
+  id: string,
+  payload: Partial<TRoom>,
+) => {
+ 
+  const result = await Room.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  return result;
+}
+
+const deleteRoom = async(id:string)=>{
+  const room = await Room.findOne({_id:id});
+  const result = await Room.deleteOne({_id:id})
+  return {result,room};
+}
+
 export const RoomServices = {
   createRoomIntoDB,
   getAllRoomsFromDB ,
+  getRoomById,
+  updateRoomIntoDB,
+  deleteRoom 
 };

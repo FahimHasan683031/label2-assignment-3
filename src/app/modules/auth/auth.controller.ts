@@ -6,11 +6,12 @@ import { AuthServices } from './auth.service';
 const loginUser = catchAsync(async (req, res) => {
  
   const { accessToken,user } = await AuthServices.loginUser(req.body);
+  const token = `Bearer ${accessToken}`
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'User logged in successfully',
-    token: accessToken,
+    token: token,
     data:user,
   });
 });

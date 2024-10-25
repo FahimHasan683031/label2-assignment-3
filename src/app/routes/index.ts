@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { UserRoutes } from '../modules/user/user.route';
 import { RoomRoutes } from '../modules/room/room.route';
-import { SlotRoutes } from '../modules/slot/user.route';
+import { SlotRoutes } from '../modules/slot/slot.route';
 import { BookingRoutes } from '../modules/booking/booking.route';
 import { AuthRoutes } from '../modules/auth/auth.rout';
 
@@ -22,7 +22,7 @@ const moduleRoutes = [
     route:SlotRoutes,
   },
   {
-    path:'/booking',
+    path:'/bookings',
     route:BookingRoutes,
   },
   {

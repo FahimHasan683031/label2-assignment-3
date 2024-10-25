@@ -11,18 +11,18 @@ const createSlot = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Slot is created succesfully',
+    message: 'Slots created successfully',
     data: result,
   });
 });
 
 const getAllSlot = catchAsync(async (req, res) => {
-  const result = await SlotServices.getAllSlotsFromDB();
+  const result = await SlotServices.getAvailableSlotsFromDB(req);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'All slots get succesfully',
+    message: 'Available slots retrieved successfully',
     data: result,
   });
 });

@@ -5,5 +5,5 @@ export interface TSlot {
   date: Date;             
   startTime: string;      
   endTime: string;        
-  isBooked: boolean;      
+  isBooked?: boolean;      
 }

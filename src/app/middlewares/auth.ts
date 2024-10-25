@@ -9,11 +9,13 @@ import catchAsync from '../utils/catchAsync';
 
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization;
+    const accessToken = req.headers.authorization;
+
+    const token = accessToken && accessToken.split(" ")[1];
     // checking if the token is missing
     if (!token) {
       
-      throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!');
+      throw new AppError(httpStatus.UNAUTHORIZED, 'You have no access to this route');
       
     }
 
@@ -37,7 +39,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
     if (requiredRoles && !requiredRoles.includes(role)) {
       throw new AppError(
         httpStatus.UNAUTHORIZED,
-        'Sorry you are not authorized!',
+        'You have no access to this route',
       );
     }
 

@@ -4,7 +4,7 @@ const slotValidationSchema = z.object({
   room: z.string({
     invalid_type_error: 'Room must be a valid ObjectId as a string',
   }),
-  date: z.date({
+  date: z.string({
     invalid_type_error: 'Date must be a valid date string',
   }),
   startTime: z.string({
@@ -15,8 +15,9 @@ const slotValidationSchema = z.object({
   }),
   isBooked: z.boolean({
     invalid_type_error: 'isBooked must be a boolean',
-  }).default(false),
+  }).optional() 
 });
+
 
 
 export const SlotValidation = {
