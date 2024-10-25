@@ -2,13 +2,11 @@ import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { SlotServices } from './slot.service';
-import { SlotValidation } from './slot.validation';
+
 
 const createSlot = catchAsync(async (req, res) => {
-  const zodValidateSlot = SlotValidation.slotValidationSchema.parse(
-    req.body,
-  );
-  const result = await SlotServices.createSlotIntoDB(zodValidateSlot);
+
+  const result = await SlotServices.createSlotIntoDB(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

@@ -2,13 +2,11 @@ import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { RoomServices } from './room.service';
-import { RoomValidation} from './room.validation';
+
 
 const createRoom = catchAsync(async (req, res) => {
-  const zodValidateRoom = RoomValidation.roomValidationSchema.parse(
-    req.body,
-  );
-  const result = await RoomServices.createRoomIntoDB(zodValidateRoom);
+ 
+  const result = await RoomServices.createRoomIntoDB(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

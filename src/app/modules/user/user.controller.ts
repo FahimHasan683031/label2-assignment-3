@@ -2,18 +2,16 @@ import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { UserServices } from './user.service';
-import { UserValidation } from './user.validation';
+
 
 const createUser = catchAsync(async (req, res) => {
-  const zodValidateUser = UserValidation.createUserValidationSchema.parse(
-    req.body,
-  );
-  const result = await UserServices.createUserIntoDB(zodValidateUser);
+
+  const result = await UserServices.createUserIntoDB(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User is created succesfully',
+    message: 'User registered successfully',
     data: result,
   });
 });
