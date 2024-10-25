@@ -2,7 +2,7 @@ import { Model } from "mongoose";
 import { UserRole } from "./user.constant";
 
 export interface TUser {
-  _id: any;
+  _id?: string;
   name: string;        
   email: string;         
   password: string;  
@@ -19,10 +19,7 @@ export interface UserModel extends Model<TUser> {
     plainTextPassword: string,
     hashedPassword: string,
   ): Promise<boolean>;
-  // isJWTIssuedBeforePasswordChanged(
-  //   passwordChangedTimestamp: Date,
-  //   jwtIssuedTimestamp: number,
-  // ): boolean;
+ 
 }
 
 export type TUserRole = keyof typeof UserRole;
