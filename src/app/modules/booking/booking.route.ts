@@ -17,7 +17,26 @@ router.post(
 
 router.get(
   '/',
+  auth(UserRole.admin),
   BookingControllers.getAllBookings,
+);
+
+router.put(
+  '/:id',
+  auth(UserRole.admin),
+  BookingControllers.updateBookign,
+);
+
+router.delete(
+  '/:id',
+  auth(UserRole.admin),
+  BookingControllers.deleteBookingById,
+);
+
+router.get(
+  '/my-bookings',
+  auth(UserRole.admin, UserRole.user),
+  BookingControllers.getMyBookings,
 );
 
 export const BookingRoutes = router;

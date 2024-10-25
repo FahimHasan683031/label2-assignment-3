@@ -1,3 +1,4 @@
+
 import { Room } from '../room/room.model';
 import { Slot } from '../slot/slot.model';
 import { User } from '../user/user.model';
@@ -34,8 +35,6 @@ const createBookingIntoDB = async (payload: TBooking) => {
     };
   }
 
-  
-
   // Check if slots exist and mark them as booked
   const bookedSlots = await Slot.find({ _id: { $in: slots } }).session(session);
 
@@ -64,7 +63,7 @@ const createBookingIntoDB = async (payload: TBooking) => {
     room: foundRoom,
     user: foundUser,
     totalAmount,
-    isConfirmed: 'confirmed',
+    isConfirmed: 'unconfirmed',
     isDeleted: false,
   });
 
@@ -86,17 +85,72 @@ const createBookingIntoDB = async (payload: TBooking) => {
   };
 };
 
-
-
-
-
-
 const getAllBookingsFromDB = async () => {
-  const bookings = await Booking.find();
+  const bookings = await Booking.find()
+    .populate({
+      path: 'slots',
+      populate: {
+        path: 'room', 
+      },
+    })
+    .populate({
+      path: 'room',
+    })
+    .populate({
+      path: 'user',
+    })
+
+    .exec();
   return bookings;
 };
+
+const getMyBooings = async (email:string) => {
+  const userId = await User.isUserExistsByEmail(email)
+
+  const bookings = await Booking.find({user:userId._id })
+  .populate({
+    path: 'slots',
+    populate: {
+      path: 'room', 
+    },
+  })
+  .populate({
+    path: 'room',
+  })
+  .populate({
+    path: 'user',
+  })
+
+  .exec();
+ return bookings;
+
+};
+
+
+const updateBookingIntoDB = async (
+  id: string,
+  payload: Partial<TBooking>,
+) => {
+  const result = await Booking.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  return result;
+}
+
+
+
+const deleteBooking = async(id:string, payload: Partial<TBooking>,)=>{
+  const result = await Booking.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  return result;
+}
+
 
 export const BookingServices = {
   createBookingIntoDB,
   getAllBookingsFromDB,
+  getMyBooings,
+  updateBookingIntoDB,
+  deleteBooking
 };
